@@ -10,7 +10,7 @@ export const App = () => {
   }
 
   const handleButtonClick = async () => {
-    const response = await fetch('http://localhost:3001/cschat', {
+    const response = await fetch('/.netlify/functions/api', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
