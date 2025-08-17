@@ -1,10 +1,8 @@
 import { getStore } from "@netlify/blobs";
 
 export const handler = async (event, context) => {
-  const store = getStore("data", {
-    siteID: process.env.NETLIFY_SITE_ID,
-    token: process.env.NETIFY_AUTH_TOKEN,
-  });
+  // Las credenciales son inyectadas automáticamente
+  const store = getStore("data");
 
   // Manejar diferentes métodos HTTP (GET, POST, etc.)
   switch (event.httpMethod) {
@@ -18,8 +16,10 @@ export const handler = async (event, context) => {
       } catch (error) {
         return {
           statusCode: 500,
+          body: JSON.stringify({ error: `Failed to retrieve data: ${error.message}` }),
         };
       }
+
     case 'POST':
       try {
         const body = JSON.parse(event.body);
@@ -35,8 +35,10 @@ export const handler = async (event, context) => {
       } catch (error) {
         return {
           statusCode: 500,
+          body: JSON.stringify({ error: `Failed to create post: ${error.message}` }),
         };
       }
+
     default:
       return {
         statusCode: 405,
