@@ -7,7 +7,7 @@ export const Messages = () => {
   const { messagesReloadTrigger } = useContext(UserContext); 
 
   useEffect(() => {
-    fetch('http://localhost:3001/cschat')
+    fetch('https://server-hvjz.onrender.com/cschat')
       .then(response => {
         if (!response.ok) {
           throw new Error('Incorrect anwser');
