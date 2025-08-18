@@ -8,5 +8,3 @@ npm install
 ``
 npm run dev
 ``
-
-To use it locally, you need to have downloaded and started my repository [server](https://github.com/csprats/server)
