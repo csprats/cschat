@@ -1,28 +1,42 @@
-import './index.css';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UserContext } from './UserContext.jsx';
 
 export const App = () => {
-
   const [message, setMessage] = useState('');
+  const { userName, triggerMessagesReload } = useContext(UserContext); 
 
   const handleInputChange = (e) => {
     setMessage(e.target.value)
   }
 
   const handleButtonClick = async () => {
-    const response = await fetch('http://localhost:3001/cschat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ message: message })
-      });
-      
-      if (!response.ok) {
-        throw new Error(`Red error: ${response.status} ${response.statusText}`);
-      }
+    if (!userName) {
+      alert('Por favor, introduce tu nombre de usuario en la ventana de sesión primero.');
+      return;
+    }
 
-      document.location.reload()
+    try {
+      const response = await fetch('http://localhost:3001/cschat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            user: userName, 
+            message: message
+          })
+        });
+        
+        if (!response.ok) {
+          throw new Error(`Error de red: ${response.status} ${response.statusText}`);
+        }
+
+        triggerMessagesReload(); 
+        setMessage('');
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error sending the messaje ):');
+    }
   }
 
   return (

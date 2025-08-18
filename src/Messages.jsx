@@ -1,36 +1,38 @@
-import React, { useState, useEffect } from 'react'
-import './index.css'
+import React, { useState, useEffect, useContext } from 'react';
+import { UserContext } from './UserContext.jsx';
+import './index.css';
 
 export const Messages = () => {
-  const [messages, setMessages] = useState([])
+  const [messages, setMessages] = useState([]);
+  const { messagesReloadTrigger } = useContext(UserContext); 
 
   useEffect(() => {
     fetch('http://localhost:3001/cschat')
       .then(response => {
         if (!response.ok) {
-          throw new Error('The response are incorrect')
+          throw new Error('Incorrect anwser');
         }
-        return response.json()
+        return response.json();
       })
       .then(data => {
-        setMessages(data)
+        setMessages(data);
       })
       .catch(error => {
-        console.error('Error obtainin data:', error)
-      })
-  }, [])
+        console.error('Error obtaining data:', error);
+      });
+  }, [messagesReloadTrigger]);
 
-  window.scrollTo(0, document.body.scrollHeight)
+  window.scrollTo(0, document.body.scrollHeight); 
 
   return (
     <>
       {messages.length > 0 ? (
         messages.map((item) => (
-          <p key={item.id}>{item.message}</p>
+          <p key={item.id} className='message'><b>{item.user}: </b>{item.message}</p>
         ))
       ) : (
         <p>Chargin messages...</p>
       )}
     </>
-  )
-}
+  );
+};
