@@ -11,7 +11,7 @@ export const App = () => {
 
   const handleButtonClick = async () => {
     if (!userName) {
-      alert('Por favor, introduce tu nombre de usuario en la ventana de sesión primero.');
+      alert('Please, enter a username');
       return;
     }
 
