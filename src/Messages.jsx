@@ -5,7 +5,7 @@ export const Messages = () => {
   const [messages, setMessages] = useState([])
 
   useEffect(() => {
-    fetch('/.netlify/functions/api')
+    fetch('http://localhost:3001/cschat')
       .then(response => {
         if (!response.ok) {
           throw new Error('The response are incorrect')
