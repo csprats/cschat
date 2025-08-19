@@ -16,7 +16,7 @@ export const App = () => {
     }
 
     try {
-      const response = await fetch('https://server-hvjz.onrender.com/cschat', {
+      const response = await fetch('https://backend-server-2efm.onrender.com/api/cschat', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

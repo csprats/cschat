@@ -7,7 +7,7 @@ export const Messages = () => {
   const { messagesReloadTrigger } = useContext(UserContext); 
 
   useEffect(() => {
-    fetch('https://server-hvjz.onrender.com/cschat')
+    fetch('https://backend-server-2efm.onrender.com/api/cschat')
       .then(response => {
         if (!response.ok) {
           throw new Error('Incorrect anwser');
@@ -16,19 +16,20 @@ export const Messages = () => {
       })
       .then(data => {
         setMessages(data);
+        console.log(data)
       })
       .catch(error => {
         console.error('Error obtaining data:', error);
       });
   }, [messagesReloadTrigger]);
 
-  window.scrollTo(0, document.body.scrollHeight); 
+  window.scrollTo(0, document.body.scrollHeight);
 
   return (
     <>
       {messages.length > 0 ? (
         messages.map((item) => (
-          <p key={item.id} className='message'><b>{item.user}: </b>{item.message}</p>
+          <p key={item.id} className='message'><b>{item.user_name}: </b>{item.message}</p>
         ))
       ) : (
         <p>Chargin messages...</p>
