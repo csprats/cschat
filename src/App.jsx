@@ -41,9 +41,11 @@ export const App = () => {
 
   return (
     <>
-      <input type="text" id='message' value={message} onChange={handleInputChange}/>
+      <input type="text" value={message} onChange={handleInputChange}/>
       <br />
-      <button id='add' onClick={handleButtonClick}>Add message</button>
+      <button onClick={handleButtonClick}>Add message</button>
+      <br />
+      <button onClick={triggerMessagesReload}>Refresh</button>
     </>
   );
 };

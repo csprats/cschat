@@ -16,7 +16,7 @@ export const Messages = () => {
       })
       .then(data => {
         setMessages(data);
-        console.log(data)
+        console.log('Refresh!')
       })
       .catch(error => {
         console.error('Error obtaining data:', error);
