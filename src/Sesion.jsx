@@ -12,7 +12,7 @@ export const Sesion = () => {
   }
 
   const handleClose = () => {
-    if (inputPasswordValue != 'cl') return
+    if (inputPasswordValue != import.meta.env.VITE_PASSWORD) return
     setOpen(false)
     saveUserName(inputValue)
     setInputValue('')
